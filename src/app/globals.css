@@ -1,26 +1,72 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* STS Brand Colors */
+  --sts-green: #1A8C3E;
+  --sts-green-dark: #0F5C28;
+  --sts-green-light: #22B54F;
+  --sts-blue: #1A5FA8;
+  --sts-blue-dark: #0E3D70;
+  --sts-blue-light: #2477CC;
+  --sts-black: #0A0A0A;
+  --sts-white: #F5F5F0;
+  --sts-gray: #8A8A8A;
+  --sts-surface: #F8F8F5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-white text-sts-black font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* STS Custom Utility Classes */
+@layer utilities {
+  .text-sts-green {
+    color: var(--sts-green);
+  }
+  .text-sts-blue {
+    color: var(--sts-blue);
+  }
+  .text-sts-gray {
+    color: var(--sts-gray);
+  }
+  .text-sts-black {
+    color: var(--sts-black);
+  }
+  
+  .bg-sts-green {
+    background-color: var(--sts-green);
+  }
+  .bg-sts-green-dark {
+    background-color: var(--sts-green-dark);
+  }
+  .bg-sts-blue {
+    background-color: var(--sts-blue);
+  }
+  .bg-sts-blue-dark {
+    background-color: var(--sts-blue-dark);
+  }
+  .bg-sts-surface {
+    background-color: var(--sts-surface);
+  }
+  .bg-sts-black {
+    background-color: var(--sts-black);
+  }
+  
+  .border-sts-green {
+    border-color: var(--sts-green);
+  }
+}
+
+/* Hover States */
+@layer components {
+  .hover\:bg-sts-green-dark:hover {
+    background-color: var(--sts-green-dark);
+  }
 }

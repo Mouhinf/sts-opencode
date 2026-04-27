@@ -1,0 +1,460 @@
+[debug] [2026-04-27T20:21:20.869Z] ----------------------------------------------------------------------
+[debug] [2026-04-27T20:21:20.874Z] Command:       /home/mouhammad/.nvm/versions/node/v22.22.2/bin/node /home/mouhammad/.nvm/versions/node/v22.22.2/bin/firebase deploy --only hosting --project sofitransservice-31cbe
+[debug] [2026-04-27T20:21:20.875Z] CLI Version:   15.15.0
+[debug] [2026-04-27T20:21:20.876Z] Platform:      linux
+[debug] [2026-04-27T20:21:20.876Z] Node Version:  v22.22.2
+[debug] [2026-04-27T20:21:20.877Z] Time:          Mon Apr 27 2026 20:21:20 GMT+0000 (heure moyenne de Greenwich)
+[debug] [2026-04-27T20:21:20.877Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-27T20:21:34.444Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"function"}
+[debug] [2026-04-27T20:21:34.444Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-04-27T20:21:34.445Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-04-27T20:21:34.484Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-27T20:21:34.485Z] > authorizing via signed-in user (manhaj499@gmail.com)
+[debug] [2026-04-27T20:21:34.485Z] [iam] checking project sofitransservice-31cbe for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-04-27T20:21:34.487Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:21:34.488Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:21:34.491Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions [none]
+[debug] [2026-04-27T20:21:34.491Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions  x-goog-user-project=sofitransservice-31cbe
+[debug] [2026-04-27T20:21:34.491Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:21:35.526Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions 200
+[debug] [2026-04-27T20:21:35.527Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:21:35.528Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:21:35.528Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:21:35.529Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:21:35.971Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:21:35.972Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe {"projectId":"sofitransservice-31cbe","projectNumber":"762033195004","displayName":"SofitransService","name":"projects/sofitransservice-31cbe","resources":{"hostingSite":"sofitransservice-31cbe"},"state":"ACTIVE","etag":"1_ef7c2bed-6f26-40e9-9938-072acaee4dcf"}
+[debug] [2026-04-27T20:22:03.639Z] defaultcredentials: writing to file /home/mouhammad/.config/firebase/manhaj499_gmail_com_application_default_credentials.json
+[debug] [2026-04-27T20:22:03.672Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:03.672Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:03.677Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites pageToken=&pageSize=10
+[debug] [2026-04-27T20:22:05.124Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:22:05.125Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:22:05.127Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:05.127Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:05.127Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 
+[debug] [2026-04-27T20:22:06.254Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:22:06.254Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:22:06.254Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:06.255Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:06.255Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config [none]
+[debug] [2026-04-27T20:22:07.070Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config 200
+[debug] [2026-04-27T20:22:07.071Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config {"projectId":"sofitransservice-31cbe","appId":"1:762033195004:web:a556ecfe64c0b5678ad479","storageBucket":"sofitransservice-31cbe.firebasestorage.app","apiKey":"AIzaSyAZiVnufLGBHabv-SVzYmedqZYWts4WggI","authDomain":"sofitransservice-31cbe.firebaseapp.com","messagingSenderId":"762033195004","measurementId":"G-QX39PT9RCB","projectNumber":"762033195004","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-04-27T20:22:52.985Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:52.987Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:22:52.987Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:22:53.995Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:22:53.997Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe {"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}
+[info] ▲ Next.js 16.2.4 (Turbopack)
+- Environments: .env.local
+
+
+[info]   Creating an optimized production build ...
+
+[info] ✓ Compiled successfully in 71s
+
+[info]   Running TypeScript ...
+
+[info]   Finished TypeScript in 30.2s ...
+
+[info]   Collecting page data using 1 worker ...
+
+[info] Firebase Admin: initialized successfully, project: sofitransservice-31cbe
+
+[info] Firebase Admin: already initialized
+
+[info]   Generating static pages using 1 worker (0/32) ...
+
+[info]   Generating static pages using 1 worker (8/32) 
+
+[info]   Generating static pages using 1 worker (16/32) 
+
+[info]   Generating static pages using 1 worker (24/32) 
+
+[info] ✓ Generating static pages using 1 worker (32/32) in 3.0s
+
+[info]   Finalizing page optimization ...
+
+[info] 
+
+[info] Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /a-propos
+├ ○ /admin/dashboard
+├ ○ /admin/dashboard/blog
+├ ○ /admin/dashboard/devis
+├ ○ /admin/dashboard/formations
+├ ○ /admin/dashboard/immobilier
+├ ○ /admin/dashboard/messages
+├ ○ /admin/dashboard/reservations
+├ ○ /admin/dashboard/vehicules
+├ ○ /admin/login
+├ ƒ /api/admin/messages
+├ ƒ /api/contact
+├ ƒ /api/devis
+├ ƒ /api/messages
+├ ƒ /api/newsletter
+├ ƒ /api/reservation
+├ ƒ /api/upload
+├ ○ /blog
+├ ● /blog/[slug]
+├ ○ /contact
+├ ○ /robots.txt
+├ ○ /services
+├ ○ /services/agrobusiness
+├ ○ /services/formation
+├ ○ /services/hygiene
+├ ○ /services/immobilier
+├ ○ /services/marketing
+├ ○ /services/transport
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+[info] 
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • use of fallback /blog/[slug]
+[info]  • non-static component /api/admin/messages/route
+[info]  • non-static component /api/contact/route
+[info]  • non-static component /api/devis/route
+[debug] [2026-04-27T20:24:57.939Z]  • non-static component /api/messages/route
+[debug] [2026-04-27T20:24:57.939Z]  • non-static component /api/newsletter/route
+[debug] [2026-04-27T20:24:57.941Z]  • non-static component /api/reservation/route
+[debug] [2026-04-27T20:24:57.941Z]  • non-static component /api/upload/route
+[info]  • and 4 other reasons, use --debug to see more
+[info] 
+[debug] [2026-04-27T20:25:05.020Z] skipping /admin/dashboard due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.020Z] skipping /admin/dashboard/blog due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/devis due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/formations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/immobilier due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/messages due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/reservations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:25:05.021Z] skipping /admin/dashboard/vehicules due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:26:25.152Z] ----------------------------------------------------------------------
+[debug] [2026-04-27T20:26:25.156Z] Command:       /home/mouhammad/.nvm/versions/node/v22.22.2/bin/node /home/mouhammad/.nvm/versions/node/v22.22.2/bin/firebase deploy --only hosting --project sofitransservice-31cbe
+[debug] [2026-04-27T20:26:25.157Z] CLI Version:   15.15.0
+[debug] [2026-04-27T20:26:25.157Z] Platform:      linux
+[debug] [2026-04-27T20:26:25.158Z] Node Version:  v22.22.2
+[debug] [2026-04-27T20:26:25.158Z] Time:          Mon Apr 27 2026 20:26:25 GMT+0000 (heure moyenne de Greenwich)
+[debug] [2026-04-27T20:26:25.159Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-27T20:26:28.411Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"function"}
+[debug] [2026-04-27T20:26:28.414Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-04-27T20:26:28.415Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-04-27T20:26:28.430Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-27T20:26:28.431Z] > authorizing via signed-in user (manhaj499@gmail.com)
+[debug] [2026-04-27T20:26:28.431Z] [iam] checking project sofitransservice-31cbe for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-04-27T20:26:28.433Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:28.434Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:28.439Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions [none]
+[debug] [2026-04-27T20:26:28.441Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions  x-goog-user-project=sofitransservice-31cbe
+[debug] [2026-04-27T20:26:28.441Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:26:29.434Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions 200
+[debug] [2026-04-27T20:26:29.435Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:26:29.439Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:29.439Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:29.440Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:26:30.037Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:26:30.037Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe {"projectId":"sofitransservice-31cbe","projectNumber":"762033195004","displayName":"SofitransService","name":"projects/sofitransservice-31cbe","resources":{"hostingSite":"sofitransservice-31cbe"},"state":"ACTIVE","etag":"1_ef7c2bed-6f26-40e9-9938-072acaee4dcf"}
+[debug] [2026-04-27T20:26:48.735Z] defaultcredentials: writing to file /home/mouhammad/.config/firebase/manhaj499_gmail_com_application_default_credentials.json
+[debug] [2026-04-27T20:26:48.740Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:48.741Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:48.742Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites pageToken=&pageSize=10
+[debug] [2026-04-27T20:26:50.171Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:26:50.172Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:26:50.173Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:50.173Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:50.173Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 
+[debug] [2026-04-27T20:26:51.286Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:26:51.287Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:26:51.287Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:51.288Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:26:51.288Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config [none]
+[debug] [2026-04-27T20:26:51.926Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config 200
+[debug] [2026-04-27T20:26:51.927Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config {"projectId":"sofitransservice-31cbe","appId":"1:762033195004:web:a556ecfe64c0b5678ad479","storageBucket":"sofitransservice-31cbe.firebasestorage.app","apiKey":"AIzaSyAZiVnufLGBHabv-SVzYmedqZYWts4WggI","authDomain":"sofitransservice-31cbe.firebaseapp.com","messagingSenderId":"762033195004","measurementId":"G-QX39PT9RCB","projectNumber":"762033195004","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-04-27T20:27:34.964Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:27:34.968Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:27:34.969Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:27:36.100Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:27:36.101Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe {"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}
+[info] ▲ Next.js 16.2.4 (Turbopack)
+
+[info] - Environments: .env.local
+
+
+[info]   Creating an optimized production build ...
+
+[info] ✓ Compiled successfully in 69s
+
+[info]   Running TypeScript ...
+
+[info]   Finished TypeScript in 52s ...
+
+[info]   Collecting page data using 1 worker ...
+
+[info] Firebase Admin: initialized successfully, project: sofitransservice-31cbe
+
+[info] Firebase Admin: already initialized
+
+[info]   Generating static pages using 1 worker (0/32) ...
+
+[info]   Generating static pages using 1 worker (8/32) 
+
+[info]   Generating static pages using 1 worker (16/32) 
+
+[info]   Generating static pages using 1 worker (24/32) 
+
+[info] ✓ Generating static pages using 1 worker (32/32) in 3.1s
+
+[info]   Finalizing page optimization ...
+
+[info] 
+
+[info] Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /a-propos
+├ ○ /admin/dashboard
+├ ○ /admin/dashboard/blog
+├ ○ /admin/dashboard/devis
+├ ○ /admin/dashboard/formations
+├ ○ /admin/dashboard/immobilier
+├ ○ /admin/dashboard/messages
+├ ○ /admin/dashboard/reservations
+├ ○ /admin/dashboard/vehicules
+├ ○ /admin/login
+├ ƒ /api/admin/messages
+├ ƒ /api/contact
+├ ƒ /api/devis
+├ ƒ /api/messages
+├ ƒ /api/newsletter
+├ ƒ /api/reservation
+├ ƒ /api/upload
+├ ○ /blog
+├ ● /blog/[slug]
+├ ○ /contact
+├ ○ /robots.txt
+├ ○ /services
+├ ○ /services/agrobusiness
+├ ○ /services/formation
+├ ○ /services/hygiene
+├ ○ /services/immobilier
+├ ○ /services/marketing
+├ ○ /services/transport
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+[info] 
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • use of fallback /blog/[slug]
+[info]  • non-static component /api/admin/messages/route
+[info]  • non-static component /api/contact/route
+[info]  • non-static component /api/devis/route
+[debug] [2026-04-27T20:30:01.074Z]  • non-static component /api/messages/route
+[debug] [2026-04-27T20:30:01.075Z]  • non-static component /api/newsletter/route
+[debug] [2026-04-27T20:30:01.076Z]  • non-static component /api/reservation/route
+[debug] [2026-04-27T20:30:01.076Z]  • non-static component /api/upload/route
+[info]  • and 4 other reasons, use --debug to see more
+[info] 
+[debug] [2026-04-27T20:30:08.600Z] skipping /admin/dashboard due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.600Z] skipping /admin/dashboard/blog due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/devis due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/formations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/immobilier due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/messages due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/reservations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:30:08.601Z] skipping /admin/dashboard/vehicules due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:32:42.342Z] ----------------------------------------------------------------------
+[debug] [2026-04-27T20:32:42.346Z] Command:       /home/mouhammad/.nvm/versions/node/v22.22.2/bin/node /home/mouhammad/.nvm/versions/node/v22.22.2/bin/firebase deploy
+[debug] [2026-04-27T20:32:42.347Z] CLI Version:   15.15.0
+[debug] [2026-04-27T20:32:42.347Z] Platform:      linux
+[debug] [2026-04-27T20:32:42.347Z] Node Version:  v22.22.2
+[debug] [2026-04-27T20:32:42.348Z] Time:          Mon Apr 27 2026 20:32:42 GMT+0000 (heure moyenne de Greenwich)
+[debug] [2026-04-27T20:32:42.348Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-27T20:32:46.493Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"function"}
+[debug] [2026-04-27T20:32:46.494Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-04-27T20:32:46.494Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-04-27T20:32:46.503Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-27T20:32:46.504Z] > authorizing via signed-in user (manhaj499@gmail.com)
+[debug] [2026-04-27T20:32:46.505Z] [iam] checking project sofitransservice-31cbe for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-04-27T20:32:46.508Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:32:46.508Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:32:46.510Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions [none]
+[debug] [2026-04-27T20:32:46.511Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions  x-goog-user-project=sofitransservice-31cbe
+[debug] [2026-04-27T20:32:46.511Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:32:47.612Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions 200
+[debug] [2026-04-27T20:32:47.612Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sofitransservice-31cbe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-04-27T20:32:47.615Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:32:47.615Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:32:47.616Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:32:48.214Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:32:48.214Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe {"projectId":"sofitransservice-31cbe","projectNumber":"762033195004","displayName":"SofitransService","name":"projects/sofitransservice-31cbe","resources":{"hostingSite":"sofitransservice-31cbe"},"state":"ACTIVE","etag":"1_ef7c2bed-6f26-40e9-9938-072acaee4dcf"}
+[debug] [2026-04-27T20:33:20.039Z] defaultcredentials: writing to file /home/mouhammad/.config/firebase/manhaj499_gmail_com_application_default_credentials.json
+[debug] [2026-04-27T20:33:20.075Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:20.075Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:20.076Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites pageToken=&pageSize=10
+[debug] [2026-04-27T20:33:21.537Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:33:21.537Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:33:21.539Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:21.539Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:21.539Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 
+[debug] [2026-04-27T20:33:22.561Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites 200
+[debug] [2026-04-27T20:33:22.562Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites {"sites":[{"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2026-04-27T20:33:22.562Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:22.563Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:33:22.563Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config [none]
+[debug] [2026-04-27T20:33:23.261Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config 200
+[debug] [2026-04-27T20:33:23.261Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sofitransservice-31cbe/webApps/-/config {"projectId":"sofitransservice-31cbe","appId":"1:762033195004:web:a556ecfe64c0b5678ad479","storageBucket":"sofitransservice-31cbe.firebasestorage.app","apiKey":"AIzaSyAZiVnufLGBHabv-SVzYmedqZYWts4WggI","authDomain":"sofitransservice-31cbe.firebaseapp.com","messagingSenderId":"762033195004","measurementId":"G-QX39PT9RCB","projectNumber":"762033195004","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-04-27T20:34:26.466Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:34:26.466Z] Checked if tokens are valid: true, expires at: 1777324695628
+[debug] [2026-04-27T20:34:26.472Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe [none]
+[debug] [2026-04-27T20:34:27.513Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe 200
+[debug] [2026-04-27T20:34:27.514Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sofitransservice-31cbe/sites/sofitransservice-31cbe {"name":"projects/sofitransservice-31cbe/sites/sofitransservice-31cbe","defaultUrl":"https://sofitransservice-31cbe.web.app","type":"DEFAULT_SITE"}
+[info] ▲ Next.js 16.2.4 (Turbopack)
+- Environments: .env.local
+
+
+[info]   Creating an optimized production build ...
+
+[info] ✓ Compiled successfully in 77s
+
+[info]   Running TypeScript ...
+
+[info]   Finished TypeScript in 30.6s ...
+
+[info]   Collecting page data using 1 worker ...
+
+[info] Firebase Admin: initialized successfully, project: sofitransservice-31cbe
+
+[info] Firebase Admin: already initialized
+
+[info]   Generating static pages using 1 worker (0/32) ...
+
+[info]   Generating static pages using 1 worker (8/32) 
+
+[info]   Generating static pages using 1 worker (16/32) 
+
+[info]   Generating static pages using 1 worker (24/32) 
+
+[info] ✓ Generating static pages using 1 worker (32/32) in 3.4s
+
+[info]   Finalizing page optimization ...
+
+[info] 
+
+[info] Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /a-propos
+├ ○ /admin/dashboard
+├ ○ /admin/dashboard/blog
+├ ○ /admin/dashboard/devis
+├ ○ /admin/dashboard/formations
+├ ○ /admin/dashboard/immobilier
+├ ○ /admin/dashboard/messages
+├ ○ /admin/dashboard/reservations
+├ ○ /admin/dashboard/vehicules
+├ ○ /admin/login
+├ ƒ /api/admin/messages
+├ ƒ /api/contact
+├ ƒ /api/devis
+├ ƒ /api/messages
+├ ƒ /api/newsletter
+├ ƒ /api/reservation
+├ ƒ /api/upload
+├ ○ /blog
+├ ● /blog/[slug]
+├ ○ /contact
+├ ○ /robots.txt
+├ ○ /services
+├ ○ /services/agrobusiness
+├ ○ /services/formation
+├ ○ /services/hygiene
+├ ○ /services/immobilier
+├ ○ /services/marketing
+├ ○ /services/transport
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+
+[info] ○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • use of fallback /blog/[slug]
+[info]  • non-static component /api/admin/messages/route
+[info]  • non-static component /api/contact/route
+[info]  • non-static component /api/devis/route
+[debug] [2026-04-27T20:36:35.950Z]  • non-static component /api/messages/route
+[debug] [2026-04-27T20:36:35.950Z]  • non-static component /api/newsletter/route
+[debug] [2026-04-27T20:36:35.950Z]  • non-static component /api/reservation/route
+[debug] [2026-04-27T20:36:35.950Z]  • non-static component /api/upload/route
+[info]  • and 4 other reasons, use --debug to see more
+[info] 
+[debug] [2026-04-27T20:36:46.925Z] skipping /admin/dashboard due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.926Z] skipping /admin/dashboard/blog due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.926Z] skipping /admin/dashboard/devis due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.926Z] skipping /admin/dashboard/formations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.927Z] skipping /admin/dashboard/immobilier due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.927Z] skipping /admin/dashboard/messages due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.927Z] skipping /admin/dashboard/reservations due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:36:46.927Z] skipping /admin/dashboard/vehicules due to it matching an unsupported rewrite/redirect/header or middlware
+[debug] [2026-04-27T20:43:06.726Z] Error: ENOENT: no such file or directory, open '/home/mouhammad/sts-opencode/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
