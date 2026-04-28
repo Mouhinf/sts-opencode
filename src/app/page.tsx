@@ -184,22 +184,26 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(async () => {
-      const props = await getAllProperties(6);
-      if (props.length > 0) setProperties(props);
-      const vehs = await getAllVehicles();
-      if (vehs.length > 0) setVehicles(vehs as unknown as Vehicle[]);
-      const trn = await getAllTrainings();
-      if (trn.length > 0) {
-        setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-      }
+    const timer = setTimeout(async () => {
+      try {
+        const props = await getAllProperties(6);
+        if (props.length > 0) setProperties(props);
+      } catch (e) { console.error(e); }
+      try {
+        const vehs = await getAllVehicles();
+        if (vehs.length > 0) setVehicles(vehs as unknown as Vehicle[]);
+      } catch (e) { console.error(e); }
+      try {
+        const trn = await getAllTrainings();
+        if (trn.length > 0) setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+      } catch (e) { console.error(e); }
       setLoading(false);
-    }, 500);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <main className="min-h-screen bg-white">
-      {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0A0A0A] via-[#0F3D1F] to-[#0A0A0A] overflow-hidden">
         <ParticleField particleCount={25} className="absolute inset-0" />
         <FloatingElement delay={0} amplitude={20} duration={6} className="absolute top-20 right-20 hidden md:block">
@@ -208,33 +212,27 @@ export default function HomePage() {
         <FloatingElement delay={2} amplitude={15} duration={8} className="absolute bottom-32 left-20 hidden md:block">
           <div className="w-20 h-20 rounded-full bg-sts-green/20" />
         </FloatingElement>
-
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-8">
             <span>🇸🇳</span>
             <span className="text-white/90 text-sm">Entreprise Sénégalaise de Confiance</span>
           </motion.div>
-
-          <motion.h1 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-sts-green to-sts-blue bg-clip-text text-transparent font-playfair">
+          <motion.h1 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-sts-green to-sts-blue bg-clip-text text-transparent">
             STS SOFITRANS<br />SERVICE
           </motion.h1>
-
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-2xl text-sts-green-light mb-8">
             Pour <span className="font-bold">Mieux Vous Servir !</span>
           </motion.p>
-
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="flex gap-4 justify-center flex-wrap mb-12">
             <Link href="/services"><Button size="lg" className="bg-sts-green hover:bg-sts-green-dark">Découvrir nos services</Button></Link>
             <Link href="/contact"><Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-sts-black">Demander un devis</Button></Link>
           </motion.div>
-
           <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
             <ArrowRight className="w-8 h-8 text-white/50 rotate-90" />
           </motion.div>
         </div>
       </section>
 
-      {/* ==================== STATS SECTION ==================== */}
       <section className="py-20 bg-sts-surface">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -243,7 +241,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== DG SECTION ==================== */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
@@ -273,7 +270,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== PROPERTIES SECTION ==================== */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -286,7 +282,6 @@ export default function HomePage() {
                 Voir tout le catalogue <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {loading ? (
                 <div className="col-span-3 text-center py-12 text-sts-gray">Chargement...</div>
@@ -300,7 +295,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== TRANSPORT SECTION ==================== */}
       <section className="py-24 bg-sts-black text-white">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -313,7 +307,6 @@ export default function HomePage() {
                 Voir les véhicules <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-
             <div className="grid md:grid-cols-3 gap-6">
               {loading ? (
                 <div className="col-span-3 text-center py-12 text-gray-400">Chargement...</div>
@@ -327,7 +320,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== FORMATIONS SECTION ==================== */}
       <section className="py-24 bg-sts-surface">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -335,12 +327,11 @@ export default function HomePage() {
               <h2 className="text-sm font-bold tracking-widest text-sts-green uppercase mb-2">Expertise</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-sts-black font-playfair">Nos Formations</h3>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {loading ? (
                 <div className="col-span-4 text-center py-12 text-sts-gray">Chargement...</div>
               ) : formations.length === 0 ? (
-                <div className="col-span-4 text-center py-12 text-sts-gray">Aucune formation disponible pour le moment</div>
+                fallbackFormations.map((f) => <FormationCard key={f.title} formation={f} />)
               ) : (
                 formations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)
               )}
@@ -349,7 +340,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== WHY US SECTION ==================== */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -357,7 +347,6 @@ export default function HomePage() {
               <h2 className="text-sm font-bold tracking-widest text-sts-blue uppercase mb-2">Engagements</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-sts-black font-playfair">Pourquoi Nous Choisir</h3>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {values.map((value) => {
                 const Icon = value.icon;
@@ -376,7 +365,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== TESTIMONIALS SECTION ==================== */}
       <section className="py-24 bg-sts-surface">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -384,7 +372,6 @@ export default function HomePage() {
               <h2 className="text-sm font-bold tracking-widest text-sts-green uppercase mb-2">Avis Clients</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-sts-black font-playfair">Ce Que l'On Dit de Nous</h3>
             </div>
-
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((item) => (
                 <motion.div key={item.name} variants={itemVariants}>
@@ -406,10 +393,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== NEWSLETTER SECTION ==================== */}
       <Newsletter />
 
-      {/* ==================== CTA SECTION ==================== */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-sts-black mb-4 font-playfair">Prêt à Construit Votre Avenir ?</h2>
