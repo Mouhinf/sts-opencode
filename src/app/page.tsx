@@ -35,21 +35,6 @@ const values = [
   { title: "Support Dédié", desc: "Accompagnement personnalisé 7j/7 pour tous vos projets", icon: Zap },
 ];
 
-const defaultProperties: Property[] = [
-  { id: "1", title: "Villa F4 Point E", type: "Villa", price: 45000000, location: "Point E, Dakar", surface: 250, bedrooms: 4, bathrooms: 3, status: "available", imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" },
-  { id: "2", title: "Appartement F3 Almadies", type: "Appartement", price: 35000000, location: "Les Almadies, Dakar", surface: 120, bedrooms: 3, bathrooms: 2, status: "available", imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" },
-  { id: "3", title: "Terrain viabilisé Sicap", type: "Terrain", price: 28000000, location: "Sicap Liberté, Dakar", surface: 300, bedrooms: 0, bathrooms: 0, status: "available", imageUrl: "https://images.unsplash.com/photo-1599581080498-5de6ebda0377?w=800" },
-  { id: "4", title: "Maison F3 Mermoz", type: "Maison", price: 38000000, location: "Mermoz, Dakar", surface: 180, bedrooms: 3, bathrooms: 2, status: "available", imageUrl: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800" },
-  { id: "5", title: "Duplex F5 Ouakam", type: "Duplex", price: 55000000, location: "Ouakam, Dakar", surface: 320, bedrooms: 5, bathrooms: 4, status: "available", imageUrl: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800" },
-  { id: "6", title: "Studio Hann", type: "Studio", price: 15000000, location: "Hann, Dakar", surface: 45, bedrooms: 1, bathrooms: 1, status: "available", imageUrl: "https://images.unsplash.com/photo-1600573472592-401b489d3cdc?w=800" },
-];
-
-const transportVehicles = [
-  { id: "1", name: "Toyota Prado LX", category: "SUV", price: 28000000, image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800", status: "available" },
-  { id: "2", name: "Mercedes Sprinter", category: "Van", price: 35000000, image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=800", status: "available" },
-  { id: "3", name: "Toyota Hiace", category: "Minibus", price: 22000000, image: "https://images.unsplash.com/photo-1536402545507-0e91c9df8f83?w=800", status: "available" },
-];
-
 type FallbackFormation = {
   id?: string;
   title: string;
@@ -193,9 +178,9 @@ function Newsletter() {
 }
 
 export default function HomePage() {
-  const [properties, setProperties] = useState<Property[]>(defaultProperties);
-  const [vehicles, setVehicles] = useState<Vehicle[]>(transportVehicles as unknown as Vehicle[]);
-  const [formations, setFormations] = useState<FallbackFormation[]>(fallbackFormations);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [formations, setFormations] = useState<FallbackFormation[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -231,10 +216,7 @@ export default function HomePage() {
     }
     loadData();
   }, []);
-
-  const displayProperties = properties.length > 0 ? properties : defaultProperties;
-  const displayVehicles = vehicles.length > 0 ? vehicles : transportVehicles as unknown as Vehicle[];
-  const displayFormations = formations.length > 0 ? formations : fallbackFormations;
+  const displayFormations = formations;
 
   return (
     <main className="min-h-screen bg-white">
@@ -327,7 +309,13 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayProperties.slice(0, 6).map((property) => <PropertyCard key={property.id} property={property} />)}
+              {loading ? (
+                <div className="col-span-3 text-center py-12 text-sts-gray">Chargement...</div>
+              ) : properties.length === 0 ? (
+                <div className="col-span-3 text-center py-12 text-sts-gray">Aucun bien disponible pour le moment</div>
+              ) : (
+                properties.slice(0, 6).map((property) => <PropertyCard key={property.id} property={property} />)
+              )}
             </div>
           </motion.div>
         </div>
@@ -348,7 +336,13 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {displayVehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
+              {loading ? (
+                <div className="col-span-3 text-center py-12 text-gray-400">Chargement...</div>
+              ) : vehicles.length === 0 ? (
+                <div className="col-span-3 text-center py-12 text-gray-400">Aucun véhicule disponible pour le moment</div>
+              ) : (
+                vehicles.slice(0, 3).map((vehicle: any) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)
+              )}
             </div>
           </motion.div>
         </div>
@@ -364,7 +358,13 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {displayFormations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)}
+              {loading ? (
+                <div className="col-span-4 text-center py-12 text-sts-gray">Chargement...</div>
+              ) : formations.length === 0 ? (
+                <div className="col-span-4 text-center py-12 text-sts-gray">Aucune formation disponible pour le moment</div>
+              ) : (
+                displayFormations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)
+              )}
             </div>
           </motion.div>
         </div>
