@@ -182,10 +182,19 @@ export default function HomePage() {
   const [formations, setFormations] = useState<FallbackFormation[]>([]);
 
   useEffect(() => {
-    import("@/lib/firebase/collections").then(({ getAllProperties, getAllVehicles, getAllTrainings }) => {
-      getAllProperties(6).then(setProperties).catch(console.error);
-      getAllVehicles().then(d => setVehicles(d as unknown as Vehicle[])).catch(console.error);
-      getAllTrainings().then(d => setFormations(d.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })))).catch(console.error);
+    import("@/lib/firebase/collections").then(mod => {
+      mod.getAllProperties(6).then(props => {
+        console.log("Properties from homepage:", props);
+        setProperties(props);
+      }).catch(e => console.error("props error:", e));
+      mod.getAllVehicles().then(v => {
+        console.log("Vehicles from homepage:", v);
+        setVehicles(v as unknown as Vehicle[]);
+      }).catch(e => console.error("vehicles error:", e));
+      mod.getAllTrainings().then(t => {
+        console.log("Trainings from homepage:", t);
+        setFormations(t.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+      }).catch(e => console.error("trainings error:", e));
     });
   }, []);
 
