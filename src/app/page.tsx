@@ -186,7 +186,7 @@ function AboutDG() {
             <p className="text-sts-gray leading-relaxed">{aboutSTS.dg.bio}</p>
             
             <div className="mt-8 flex gap-4">
-              <Link href="/about">
+              <Link href="/a-propos">
                 <Button variant="outline">En savoir plus</Button>
               </Link>
               <Link href="/contact">
