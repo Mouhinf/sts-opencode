@@ -282,6 +282,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ==================== DG SECTION ==================== */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+              <div className="relative aspect-[3/4] max-w-sm mx-auto">
+                <img src="/badara-niang.png" alt="Badara Niang" className="w-full h-full object-cover rounded-2xl shadow-2xl" />
+                <div className="absolute -bottom-4 -right-4 bg-sts-green text-white px-6 py-3 rounded-lg shadow-lg">
+                  <div className="font-bold text-lg">Badara Niang</div>
+                  <div className="text-sm opacity-90">Directeur Général</div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
+              <h2 className="text-sm font-bold tracking-widest text-sts-blue uppercase mb-2">Fondateur</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-sts-black mb-6">Le Mot du Directeur Général</h3>
+              <p className="text-sts-gray mb-4 leading-relaxed">
+                Fondateur et Directeur Général de STS Sofitrans Service, fort de plus de 15 ans d'expérience dans le Secteur Privé Sénégalais. Diplômé en Management des Entreprises, j'ai construit STS autour d'une vision : offrir des services intégrés de qualité aux entreprises et particuliers au Sénégal.
+              </p>
+              <p className="text-sts-gray mb-6 leading-relaxed">
+                Notre mission est de faire de STS le partenaire de référence pour le développement des entreprises et particuliers au Sénégal, à travers des services de qualité, innovants et accessibles. "Pour Mieux Vous Servir !"
+              </p>
+              <Link href="/a-propos">
+                <Button variant="outline">En savoir plus</Button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ==================== PROPERTIES SECTION ==================== */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
