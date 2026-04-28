@@ -184,13 +184,15 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllProperties(6).then(data => { if (data.length > 0) setProperties(data); });
-    getAllVehicles().then(data => { if (data.length > 0) setVehicles(data as unknown as Vehicle[]); });
-    getAllTrainings().then(data => { 
-      if (data.length > 0) {
-        setFormations(data.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-      }
-      setLoading(false);
+    import("@/lib/firebase/collections").then(mod => {
+      mod.getAllProperties(6).then(data => { if (data.length > 0) setProperties(data); });
+      mod.getAllVehicles().then(data => { if (data.length > 0) setVehicles(data as unknown as Vehicle[]); });
+      mod.getAllTrainings().then(data => { 
+        if (data.length > 0) {
+          setFormations(data.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+        }
+        setLoading(false);
+      });
     });
   }, []);
 

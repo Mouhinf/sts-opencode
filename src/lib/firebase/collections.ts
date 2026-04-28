@@ -42,15 +42,14 @@ export const mockTrainings: Training[] = [
 export const getAllProperties = async (limitCount = 50) => {
   try {
     const colRef = collection(db, COLLECTIONS.PROPERTIES);
-    const q = query(colRef, limit(limitCount));
-    const snap = await getDocs(q);
+    const snap = await getDocs(colRef);
     if (snap.empty || snap.size === 0) {
       console.log("No properties found in Firestore");
       return [];
     }
     const props = snap.docs.map(d => ({ id: d.id, ...d.data() } as Property));
     console.log("Properties loaded:", props.length);
-    return props;
+    return props.slice(0, limitCount);
   } catch (e) {
     console.error("Error loading properties:", e);
     return [];
