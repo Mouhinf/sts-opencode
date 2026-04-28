@@ -25,11 +25,21 @@ function Toast({ message, type, onClose }: { message: string; type: "error" | "s
       initial={{ opacity: 0, y: 50 }} 
       animate={{ opacity: 1, y: 0 }} 
       exit={{ opacity: 0, y: 50 }} 
-      className={`fixed bottom-4 right-4 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg z-50 ${type === "error" ? "bg-red-500 text-white" : "bg-green-500 text-white"}`}
+      className="fixed bottom-6 right-6 flex items-center gap-3 px-4 py-3 rounded-xl shadow-xl z-50 backdrop-blur-sm bg-white/95 border border-gray-200"
     >
-      <AlertCircle className="w-5 h-5" />
-      <span>{message}</span>
-      <button onClick={onClose} className="ml-2 hover:opacity-80">×</button>
+      <div className={`w-2 h-8 rounded-full ${type === "error" ? "bg-red-500" : "bg-green-500"}`} />
+      <div className="flex-1">
+        <p className={`font-medium ${type === "error" ? "text-red-700" : "text-green-700"}`}>
+          {type === "error" ? "Erreur" : "Succès"}
+        </p>
+        <p className="text-gray-600 text-sm">{message}</p>
+      </div>
+      <button 
+        onClick={onClose} 
+        className="ml-2 text-gray-400 hover:text-gray-600 transition-colors"
+      >
+        ×
+      </button>
     </motion.div>
   );
 }
