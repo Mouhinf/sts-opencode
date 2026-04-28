@@ -2,61 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Wrench, Leaf, Truck, Calculator } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Wrench, Leaf, Truck, Calculator, Bed, Maximize, ExternalLink, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ParticleField } from "@/components/animations/ParticleField";
 import { FloatingElement } from "@/components/animations/FloatingElement";
-
-const featuredProperties = [
-  { id: "1", title: "Villa F4 Point E", type: "Villa", price: 45000000, location: "Point E, Dakar", surface: 250, bedrooms: 4, bathrooms: 3, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800", status: "available" },
-  { id: "2", title: "Appartement F3 Almadies", type: "Appartement", price: 35000000, location: "Les Almadies, Dakar", surface: 120, bedrooms: 3, bathrooms: 2, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", status: "available" },
-  { id: "3", title: "Terrain viabilisé Sicap", type: "Terrain", price: 28000000, location: "Sicap Liberté, Dakar", surface: 300, bedrooms: 0, bathrooms: 0, image: "https://images.unsplash.com/photo-1599581080498-5de6ebda0377?w=800", status: "available" },
-  { id: "4", title: "Maison F3 Mermoz", type: "Maison", price: 38000000, location: "Mermoz, Dakar", surface: 180, bedrooms: 3, bathrooms: 2, image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800", status: "available" },
-  { id: "5", "title": "Duplex F5 Ouakam", type: "Duplex", price: 55000000, location: "Ouakam, Dakar", surface: 320, bedrooms: 5, bathrooms: 4, image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800", status: "available" },
-  { id: "6", title: "Studio Hann", type: "Studio", price: 15000000, location: "Hann, Dakar", surface: 45, bedrooms: 1, bathrooms: 1, image: "https://images.unsplash.com/photo-1600573472592-401b489d3cdc?w=800", status: "available" },
-];
-
-const transportFleet = [
-  { id: "1", title: "Toyota Prado LX", category: "SUV", price: 28000000, image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800", status: "available" },
-  { id: "2", title: "Mercedes Sprinter", category: "Van", price: 35000000, image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=800", status: "available" },
-  { id: "3", title: "Toyota Hiace", category: "Minibus", price: 22000000, image: "https://images.unsplash.com/photo-1536402545507-0e91c9df8f83?w=800", status: "available" },
-];
-
-const agribusinessProducts = [
-  { id: "1", title: "Poules pondeuses", category: "Élevage", price: 15000, unit: "/poule", description: "Poules pondeuses de race", image: "https://images.unsplash.com/photo-1548550023-2bdb3c5dded2?w=800" },
-  { id: "2", title: "Poules de chair", category: "Élevage", price: 12000, unit: "/poule", description: "Poules prête à abattre", image: "https://images.unsplash.com/photo-1569288063644-5c6a5c11771f?w=800" },
-  { id: "3", title: "Aliment poultry", category: "Intrants", price: 14500, unit: "/sac 25kg", description: "Aliment complet croissance", image: "https://images.unsplash.com/photo-1625246333195-78d9c38adc23?w=800" },
-];
-
-const formations = [
-  { title: "Gestion Immobilière", desc: "Masterclass en gestion locative et transaction", duration: "2 jours", icon: Building2 },
-  { title: "Transport & Logistique", desc: "Formation chauffeurs professionnels", duration: "1 mois", icon: Truck },
-  { title: "Comptabilité Sage", desc: "Logiciel Sage comptabilité & paie", duration: "2 semaines", icon: Calculator },
-  { title: "Technique d'Élevage", desc: "Élevage moderne de volailles", duration: "1 semaine", icon: Leaf },
-];
-
-const stats = [
-  { value: 500, suffix: "+", label: "Clients satisfaits", icon: Users },
-  { value: 150, suffix: "+", label: "Biens gérés", icon: Building2 },
-  { value: 50, suffix: "+", label: "Véhicules", icon: Car },
-  { value: 20, suffix: "+", label: "Formations", icon: GraduationCap },
-];
-
-const values = [
-  { title: "Expertise Locale", desc: "Plus de 10 ans au Sénégal, connaissance approfondie du marché local", icon: MapPin },
-  { title: "Services Intégrés", desc: "Tout sous un même toit : immobilier, transport, formation, agrobusiness", icon: Briefcase },
-  { title: "Confiance & Transparence", desc: "Contrats clairs, tarifications transparentes, éthique professionnelle", icon: Shield },
-  { title: "Support Dédié", desc: "Équipe disponible 7j/7 pour vous accompagner", icon: Zap },
-];
-
-const testimonials = [
-  { name: "Amadou Diop", role: "Investisseur", text: "STS a transformé ma vision de l'investissement immobilier au Sénégal. Un service d'une qualité rare.", initials: "AD", color: "bg-sts-green" },
-  { name: "Fatou Sow", role: "Directrice Logistique", text: "La réactivité et le professionnalisme de l'équipe transport sont exceptionnels.", initials: "FS", color: "bg-sts-blue" },
-  { name: "Moussa Ndiaye", role: "Entrepreneur", text: "L'accompagnement en agrobusiness nous a permis de structurer notre exploitation avec succès.", initials: "MN", color: "bg-sts-black" },
-];
+import { getAllProperties } from "@/lib/firebase/collections";
+import type { Property } from "@/types";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -68,7 +21,49 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 };
 
-function StatCard({ value, suffix, label, icon: Icon, index }: { value: number; suffix: string; label: string; icon: any; index: number }) {
+const stats = [
+  { value: 500, suffix: "+", label: "Clients satisfaits", icon: Users },
+  { value: 150, suffix: "+", label: "Biens gérés", icon: Building2 },
+  { value: 50, suffix: "+", label: "Véhicules", icon: Car },
+  { value: 20, suffix: "+", label: "Formations", icon: GraduationCap },
+];
+
+const values = [
+  { title: "Expertise Locale", desc: "Plus de 10 ans au Sénégal, connaissance approfondie du marché local", icon: MapPin },
+  { title: "Services Intégrés", desc: "Tout sous un même toit : immobilier, transport, formation, agrobusiness", icon: Briefcase },
+  { title: "Confiance & Transparence", desc: "Processus clairs et éthique professionnelle rigoureuse", icon: Shield },
+  { title: "Support Dédié", desc: "Accompagnement personnalisé 7j/7 pour tous vos projets", icon: Zap },
+];
+
+const defaultProperties: Property[] = [
+  { id: "1", title: "Villa F4 Point E", type: "Villa", price: 45000000, location: "Point E, Dakar", surface: 250, bedrooms: 4, bathrooms: 3, status: "available", imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" },
+  { id: "2", title: "Appartement F3 Almadies", type: "Appartement", price: 35000000, location: "Les Almadies, Dakar", surface: 120, bedrooms: 3, bathrooms: 2, status: "available", imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" },
+  { id: "3", title: "Terrain viabilisé Sicap", type: "Terrain", price: 28000000, location: "Sicap Liberté, Dakar", surface: 300, bedrooms: 0, bathrooms: 0, status: "available", imageUrl: "https://images.unsplash.com/photo-1599581080498-5de6ebda0377?w=800" },
+  { id: "4", title: "Maison F3 Mermoz", type: "Maison", price: 38000000, location: "Mermoz, Dakar", surface: 180, bedrooms: 3, bathrooms: 2, status: "available", imageUrl: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800" },
+  { id: "5", title: "Duplex F5 Ouakam", type: "Duplex", price: 55000000, location: "Ouakam, Dakar", surface: 320, bedrooms: 5, bathrooms: 4, status: "available", imageUrl: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800" },
+  { id: "6", title: "Studio Hann", type: "Studio", price: 15000000, location: "Hann, Dakar", surface: 45, bedrooms: 1, bathrooms: 1, status: "available", imageUrl: "https://images.unsplash.com/photo-1600573472592-401b489d3cdc?w=800" },
+];
+
+const transportVehicles = [
+  { id: "1", name: "Toyota Prado LX", category: "SUV", price: 28000000, image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800", status: "available" },
+  { id: "2", name: "Mercedes Sprinter", category: "Van", price: 35000000, image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=800", status: "available" },
+  { id: "3", name: "Toyota Hiace", category: "Minibus", price: 22000000, image: "https://images.unsplash.com/photo-1536402545507-0e91c9df8f83?w=800", status: "available" },
+];
+
+const formations = [
+  { title: "Gestion Immobilière", desc: "Masterclass en gestion locative et transaction", duration: "2 jours", icon: Building2 },
+  { title: "Transport & Logistique", desc: "Formation chauffeurs professionnels", duration: "1 mois", icon: Truck },
+  { title: "Comptabilité Sage", desc: "Logiciel Sage comptabilité & paie", duration: "2 semaines", icon: Calculator },
+  { title: "Technique d'Élevage", desc: "Élevage moderne de volailles", duration: "1 semaine", icon: Leaf },
+];
+
+const testimonials = [
+  { name: "Amadou Diop", role: "Investisseur", text: "STS a transformé ma vision de l'investissement immobilier au Sénégal. Un service d'une qualité rare.", initials: "AD", color: "bg-sts-green" },
+  { name: "Fatou Sow", role: "Directrice Logistique", text: "La réactivité et le professionnalisme de l'équipe transport sont exceptionnels.", initials: "FS", color: "bg-sts-blue" },
+  { name: "Moussa Ndiaye", role: "Entrepreneur", text: "L'accompagnement en agrobusiness nous a permis de structurer notre exploitation avec succès.", initials: "MN", color: "bg-sts-black" },
+];
+
+function StatCard({ value, suffix, label, icon: Icon }: { value: number; suffix: string; label: string; icon: any }) {
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center">
       <div className="w-16 h-16 bg-sts-green/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -80,13 +75,14 @@ function StatCard({ value, suffix, label, icon: Icon, index }: { value: number; 
   );
 }
 
-function PropertyCard({ property, index }: { property: typeof featuredProperties[0]; index: number }) {
+function PropertyCard({ property }: { property: Property }) {
+  const image = property.imageUrl || property.images?.[0] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800";
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
       <Link href="/services/immobilier">
         <Card variant="elevated" className="overflow-hidden group h-full">
           <div className="relative h-56 overflow-hidden">
-            <img src={property.image} alt={property.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src={image} alt={property.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-sts-black/60 to-transparent" />
             <div className="absolute top-4 left-4 bg-sts-green text-white text-xs font-bold px-3 py-1 rounded-full">{property.type}</div>
             <div className="absolute bottom-4 left-4 text-white">
@@ -96,8 +92,8 @@ function PropertyCard({ property, index }: { property: typeof featuredProperties
           <div className="p-5">
             <h3 className="font-bold text-lg text-sts-black mb-2 group-hover:text-sts-green transition-colors">{property.title}</h3>
             <div className="flex gap-4 text-sm text-sts-gray mb-3">
-              <span className="flex items-center gap-1"><Building2 className="w-4 h-4" /> {property.surface} m²</span>
-              {property.bedrooms > 0 && <span className="flex items-center gap-1"><Car className="w-4 h-4" /> {property.chambres} ch.</span>}
+              <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {property.surface} m²</span>
+              {property.bedrooms > 0 && <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {property.bedrooms} ch.</span>}
             </div>
             <div className="text-xl font-bold text-sts-green">{new Intl.NumberFormat("fr-FR").format(property.price)} XOF</div>
           </div>
@@ -107,18 +103,18 @@ function PropertyCard({ property, index }: { property: typeof featuredProperties
   );
 }
 
-function VehicleCard({ vehicle, index }: { vehicle: typeof transportFleet[0]; index: number }) {
+function VehicleCard({ vehicle }: { vehicle: typeof transportVehicles[0] }) {
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
       <Link href="/services/transport">
         <Card variant="elevated" className="overflow-hidden group h-full">
           <div className="relative h-40 overflow-hidden">
-            <img src={vehicle.image} alt={vehicle.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-sts-black/60 to-transparent" />
             <div className="absolute top-4 left-4 bg-sts-blue text-white text-xs font-bold px-3 py-1 rounded-full">{vehicle.category}</div>
           </div>
           <div className="p-4">
-            <h3 className="font-bold text-sts-black group-hover:text-sts-blue transition-colors">{vehicle.title}</h3>
+            <h3 className="font-bold text-sts-black group-hover:text-sts-blue transition-colors">{vehicle.name}</h3>
             <div className="text-sts-green font-bold mt-2">{new Intl.NumberFormat("fr-FR").format(vehicle.price)} XOF</div>
           </div>
         </Card>
@@ -127,7 +123,7 @@ function VehicleCard({ vehicle, index }: { vehicle: typeof transportFleet[0]; in
   );
 }
 
-function FormationCard({ formation, index }: { formation: typeof formations[0]; index: number }) {
+function FormationCard({ formation }: { formation: typeof formations[0] }) {
   const Icon = formation.icon;
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -164,7 +160,7 @@ function Newsletter() {
   return (
     <section className="py-20 bg-gradient-to-br from-sts-green to-[#0A4D21] text-white">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Rejoignez l'élite STS</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4"> Rejoignez l'élite STS</h2>
         <p className="text-white/80 mb-8 max-w-xl mx-auto">Recevez en priorité nos nouvelles opportunités immobilières et nos offres exclusives.</p>
         {success ? (
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-white font-bold">✓ Merci ! Votre inscription est confirmée.</motion.div>
@@ -182,7 +178,26 @@ function Newsletter() {
 }
 
 export default function HomePage() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [properties, setProperties] = useState<Property[]>(defaultProperties);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const props = await getAllProperties(6);
+        if (props.length > 0) {
+          setProperties(props.filter(p => p.status === "available").slice(0, 6));
+        }
+      } catch (e) {
+        console.log("Using default properties");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  const displayProperties = properties.length > 0 ? properties : defaultProperties;
 
   return (
     <main className="min-h-screen bg-white">
@@ -225,7 +240,7 @@ export default function HomePage() {
       <section className="py-20 bg-sts-surface">
         <div className="container mx-auto px-4">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, i) => <StatCard key={stat.label} {...stat} icon={stat.icon} index={i} />)}
+            {stats.map((stat, i) => <StatCard key={stat.label} {...stat} />)}
           </motion.div>
         </div>
       </section>
@@ -245,7 +260,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredProperties.slice(0, 6).map((property, i) => <PropertyCard key={property.id} property={property} index={i} />)}
+              {displayProperties.slice(0, 6).map((property) => <PropertyCard key={property.id} property={property} />)}
             </div>
           </motion.div>
         </div>
@@ -266,7 +281,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {transportFleet.map((vehicle, i) => <VehicleCard key={vehicle.id} vehicle={vehicle} index={i} />)}
+              {transportVehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
             </div>
           </motion.div>
         </div>
@@ -282,7 +297,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {formations.map((formation, i) => <FormationCard key={formation.title} formation={formation} index={i} />)}
+              {formations.map((formation) => <FormationCard key={formation.title} formation={formation} />)}
             </div>
           </motion.div>
         </div>
@@ -298,7 +313,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, i) => {
+              {values.map((value) => {
                 const Icon = value.icon;
                 return (
                   <motion.div key={value.title} variants={itemVariants} className="flex flex-col items-center text-center group">
@@ -325,7 +340,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((item, i) => (
+              {testimonials.map((item) => (
                 <motion.div key={item.name} variants={itemVariants}>
                   <Card variant="elevated" className="p-8 relative">
                     <div className="flex gap-1 mb-4">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}</div>
