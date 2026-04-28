@@ -41,7 +41,7 @@ export const mockTrainings: Training[] = [
 
 export const getAllProperties = async (limitCount = 50) => {
   try {
-    const colRef = collection(db, COLLECTIONS.PROPERTIES);
+    const colRef = collection(db, "properties");
     const snap = await getDocs(colRef);
     if (snap.empty || snap.size === 0) {
       console.log("No properties found in Firestore");
@@ -64,9 +64,8 @@ export const createProperty = async (data: Omit<Property, "id" | "createdAt" | "
 
 export const getAllVehicles = async () => {
   try {
-    const colRef = collection(db, COLLECTIONS.VEHICLES);
-    const q = query(colRef, limit(50));
-    const snap = await getDocs(q);
+    const colRef = collection(db, "vehicles");
+    const snap = await getDocs(colRef);
     if (snap.empty || snap.size === 0) {
       console.log("No vehicles found in Firestore");
       return [];
@@ -74,6 +73,21 @@ export const getAllVehicles = async () => {
     return snap.docs.map(d => ({ id: d.id, ...d.data() } as Vehicle));
   } catch (e) {
     console.error("Error loading vehicles:", e);
+    return [];
+  }
+};
+
+export const getAllTrainings = async () => {
+  try {
+    const colRef = collection(db, "trainings");
+    const snap = await getDocs(colRef);
+    if (snap.empty || snap.size === 0) {
+      console.log("No trainings found in Firestore");
+      return [];
+    }
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Training));
+  } catch (e) {
+    console.error("Error loading trainings:", e);
     return [];
   }
 };
