@@ -3,10 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
-import type { Property, Vehicle, Training } from "@/types";
-
-const containerVariants = {
 import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Leaf, Truck, Calculator, Maximize, Bed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";

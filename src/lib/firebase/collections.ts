@@ -4,6 +4,11 @@ import {
   collection,
   addDoc,
   getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+  serverTimestamp,
 } from "firebase/firestore";
 import type { Property, Vehicle, Booking, Quote, Message, Training, BlogPost } from "@/types";
 
@@ -140,32 +145,6 @@ export const getAllMessages = async () => {
 };
 
 export const createMessage = async (data: Omit<Message, "id" | "createdAt">) => {
-  const colRef = collection(db, COLLECTIONS.MESSAGES);
-  const docRef = await addDoc(colRef, { ...data, createdAt: serverTimestamp() });
-  return docRef.id;
-};
-
-export const getAllTrainings = async () => {
-  try {
-    const colRef = collection(db, COLLECTIONS.TRAININGS);
-    const q = query(colRef, limit(50));
-    const snap = await getDocs(q);
-    if (snap.empty || snap.size === 0) {
-      console.log("No trainings found in Firestore");
-      return [];
-    }
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Training));
-  } catch (e) {
-    console.error("Error loading trainings:", e);
-    return [];
-  }
-};
-    console.error("Error loading trainings:", e);
-    return [];
-  }
-};
-
-export const createTraining = async (data: Omit<Training, "id" | "createdAt">) => {
   const colRef = collection(db, COLLECTIONS.TRAININGS);
   const docRef = await addDoc(colRef, { ...data, createdAt: serverTimestamp() });
   return docRef.id;
