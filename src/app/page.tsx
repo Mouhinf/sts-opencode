@@ -184,18 +184,17 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllProperties(6).then(data => {
-      if (data.length > 0) setProperties(data);
-      getAllVehicles().then(vdata => {
-        if (vdata.length > 0) setVehicles(vdata as unknown as Vehicle[]);
-        getAllTrainings().then(fdata => {
-          if (fdata.length > 0) {
-            setFormations(fdata.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-          }
-          setLoading(false);
-        });
-      });
-    });
+    setTimeout(async () => {
+      const props = await getAllProperties(6);
+      if (props.length > 0) setProperties(props);
+      const vehs = await getAllVehicles();
+      if (vehs.length > 0) setVehicles(vehs as unknown as Vehicle[]);
+      const trn = await getAllTrainings();
+      if (trn.length > 0) {
+        setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+      }
+      setLoading(false);
+    }, 500);
   }, []);
 
   return (
