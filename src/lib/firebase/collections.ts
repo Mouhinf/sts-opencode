@@ -1,13 +1,9 @@
+import "./client";
 import { db } from "./client";
 import {
   collection,
   addDoc,
   getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-  serverTimestamp,
 } from "firebase/firestore";
 import type { Property, Vehicle, Booking, Quote, Message, Training, BlogPost } from "@/types";
 
