@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
+import type { Property, Vehicle, Training } from "@/types";
+
+const containerVariants = {
 import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Leaf, Truck, Calculator, Maximize, Bed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -184,24 +188,18 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { getAllProperties, getAllVehicles, getAllTrainings } = await import("@/lib/firebase/collections");
-        
-        const props = await getAllProperties(6);
-        setProperties(props);
-        
-        const vehs = await getAllVehicles();
-        setVehicles(vehs as unknown as Vehicle[]);
-        
-        const trn = await getAllTrainings();
-        setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-      } catch (err) {
-        console.error("Error:", err);
-      }
-      setLoading(false);
-    };
-    fetchData();
+    getAllProperties(6).then(data => {
+      if (data.length > 0) setProperties(data);
+      getAllVehicles().then(vdata => {
+        if (vdata.length > 0) setVehicles(vdata as unknown as Vehicle[]);
+        getAllTrainings().then(fdata => {
+          if (fdata.length > 0) {
+            setFormations(fdata.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+          }
+          setLoading(false);
+        });
+      });
+    });
   }, []);
 
   return (
