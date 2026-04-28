@@ -184,40 +184,14 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const propsData = await getAllProperties(6);
-        console.log("Properties loaded:", propsData);
-        if (propsData.length > 0) {
-          setProperties(propsData);
-        }
-        
-        const vehiclesData = await getAllVehicles();
-        console.log("Vehicles loaded:", vehiclesData);
-        if (vehiclesData.length > 0) {
-          setVehicles(vehiclesData as unknown as Vehicle[]);
-        }
-        
-        const formationsData = await getAllTrainings();
-        console.log("Trainings loaded:", formationsData);
-        if (formationsData.length > 0) {
-          const mapped = formationsData.map((f: Training) => ({
-            id: f.id,
-            title: f.title,
-            description: f.description,
-            duration: f.duration,
-            price: f.price,
-            category: f.category,
-          }));
-          setFormations(mapped);
-        }
-      } catch (e) {
-        console.error("Error loading data:", e);
-      } finally {
-        setLoading(false);
+    getAllProperties(6).then(data => { if (data.length > 0) setProperties(data); });
+    getAllVehicles().then(data => { if (data.length > 0) setVehicles(data as unknown as Vehicle[]); });
+    getAllTrainings().then(data => { 
+      if (data.length > 0) {
+        setFormations(data.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
       }
-    }
-    loadData();
+      setLoading(false);
+    });
   }, []);
 
   return (
