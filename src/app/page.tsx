@@ -12,13 +12,23 @@ import { ParticleField } from "@/components/animations/ParticleField";
 import { FloatingElement } from "@/components/animations/FloatingElement";
 
 const services = [
-  { title: "Immobilier", desc: "Vente, location, gestion de biens", icon: Home, href: "/services/immobilier", color: "bg-sts-green" },
-  { title: "Transport", desc: "Location de véhicules avec chauffeur", icon: Car, href: "/services/transport", color: "bg-sts-blue" },
-  { title: "Agrobusiness", desc: "Solutions agricoles innovantes", icon: Sprout, href: "/services/agrobusiness", color: "bg-sts-green" },
-  { title: "Formation", desc: "Programmes certifiants", icon: GraduationCap, href: "/services/formation", color: "bg-sts-blue" },
-  { title: "Conseil", desc: "Accompagnement stratégique", icon: Briefcase, href: "/services/conseil", color: "bg-sts-green" },
-  { title: "Import-Export", desc: "Commerce international", icon: Globe, href: "/services/import-export", color: "bg-sts-blue" },
+  { title: "Immobilier", desc: "Vente, location et gestion de biens immobiliers", icon: Home, href: "/services/immobilier", color: "bg-sts-green" },
+  { title: "Transport", desc: "Location vente de véhicules avec chauffeur", icon: Car, href: "/services/transport", color: "bg-sts-blue" },
+  { title: "Agrobusiness", desc: "Solutions agricoles et élevage moderne", icon: Sprout, href: "/services/agrobusiness", color: "bg-sts-green" },
+  { title: "Formation", desc: "Programmes certifiants et coaching", icon: GraduationCap, href: "/services/formation", color: "bg-sts-blue" },
+  { title: "Conseil", desc: "Audit et stratégie d'entreprise", icon: Briefcase, href: "/services/conseil", color: "bg-sts-green" },
+  { title: "Import-Export", desc: "Commerce international et logistique", icon: Globe, href: "/services/import-export", color: "bg-sts-blue" },
 ];
+
+const aboutSTS = {
+  dg: {
+    name: "Badara Niang",
+    title: "Directeur Général",
+    image: "/badara-niang.png",
+    bio: "Fondateur et Directeur Général de STS Sofitrans Service, fort de plus de 15 ans d'expérience dans le Secteur Privé Sénégalais. Diplômé en Management des Entreprises, il a construit STS autour d'une vision : offrir des services intégrés de qualité aux entreprises et particuliers au Sénégal. Sous sa direction, STS est devenue un acteur majeur de l'immobilier, du transport et de la formation professionnelle.",
+    vision: "Faire de STS le partenaire de référence pour le développement des entreprises et particuliers au Sénégal, à travers des services de qualité, innovants et accessibles.",
+  }
+};
 
 const stats = [
   { value: 500, suffix: "+", label: "Clients satisfaits" },
@@ -146,6 +156,47 @@ function TestimonialCard({ item, index }: { item: typeof testimonials[0]; index:
         </div>
       </Card>
     </motion.div>
+  );
+}
+
+function AboutDG() {
+  return (
+    <motion.section variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-center text-sts-black mb-4">À Propos de Nous</motion.h2>
+        <p className="text-center text-sts-gray mb-12 max-w-2xl mx-auto">Découvrez qui sommes-nous</p>
+        
+        <div className="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
+          <motion.div variants={itemVariants} className="relative">
+            <div className="w-full max-w-md mx-auto aspect-[3/4] relative rounded-2xl overflow-hidden shadow-2xl">
+              <img src={aboutSTS.dg.image} alt={aboutSTS.dg.name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-sts-black/50 to-transparent" />
+            </div>
+            <div className="absolute -bottom-6 -right-6 md:right-6 bg-sts-green text-white px-6 py-3 rounded-lg shadow-lg">
+              <div className="font-bold text-lg">{aboutSTS.dg.name}</div>
+              <div className="text-sm opacity-90">{aboutSTS.dg.title}</div>
+            </div>
+          </motion.div>
+          
+          <motion.div variants={itemVariants}>
+            <h3 className="text-2xl font-bold text-sts-black mb-4">Notre Vision</h3>
+            <p className="text-sts-gray mb-6">{aboutSTS.dg.vision}</p>
+            
+            <h3 className="text-2xl font-bold text-sts-black mb-4">Le Mot du Directeur Général</h3>
+            <p className="text-sts-gray leading-relaxed">{aboutSTS.dg.bio}</p>
+            
+            <div className="mt-8 flex gap-4">
+              <Link href="/about">
+                <Button variant="outline">En savoir plus</Button>
+              </Link>
+              <Link href="/contact">
+                <Button className="bg-sts-green">Nous contacter</Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </motion.section>
   );
 }
 
@@ -291,6 +342,9 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+
+      {/* ==================== ABOUT DG SECTION ==================== */}
+      <AboutDG />
 
       {/* ==================== SERVICES SECTION ==================== */}
       <motion.section variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="py-20 bg-sts-surface">

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { db, adminInitialized } from "@/lib/firebase/admin";
+
+export const dynamic = "force-static";
 
 const contactSchema = z.object({
   name: z.string().min(1),
@@ -34,16 +35,6 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  // Save to Firestore if available
-  if (adminInitialized && db) {
-    try {
-      await db.collection("messages").add(messageData);
-    } catch (e) {
-      console.error("Firestore write error:", e);
-    }
-  }
-
-  // Return the message data so client can store in localStorage
   return NextResponse.json({ 
     success: true, 
     message: "Message envoyé !",
