@@ -42,14 +42,18 @@ export const mockTrainings: Training[] = [
 export const getAllProperties = async (limitCount = 50) => {
   try {
     const colRef = collection(db, COLLECTIONS.PROPERTIES);
-    const q = query(colRef, limit(limitCount));
+    const q = query(colRef, orderBy("createdAt", "desc"), limit(limitCount));
     const snap = await getDocs(q);
-    if (snap.empty || snap.size === 0) return mockProperties;
+    if (snap.empty || snap.size === 0) {
+      console.log("No properties found in Firestore");
+      return [];
+    }
     const props = snap.docs.map(d => ({ id: d.id, ...d.data() } as Property));
+    console.log("Properties loaded:", props.length);
     return props;
   } catch (e) {
     console.error("Error loading properties:", e);
-    return mockProperties;
+    return [];
   }
 };
 
@@ -61,11 +65,17 @@ export const createProperty = async (data: Omit<Property, "id" | "createdAt" | "
 
 export const getAllVehicles = async () => {
   try {
-    const snap = await getDocs(collection(db, COLLECTIONS.VEHICLES));
-    if (snap.empty || snap.size === 0) return mockVehicles;
+    const colRef = collection(db, COLLECTIONS.VEHICLES);
+    const q = query(colRef, orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+    if (snap.empty || snap.size === 0) {
+      console.log("No vehicles found in Firestore");
+      return [];
+    }
     return snap.docs.map(d => ({ id: d.id, ...d.data() } as Vehicle));
-  } catch {
-    return mockVehicles;
+  } catch (e) {
+    console.error("Error loading vehicles:", e);
+    return [];
   }
 };
 
@@ -128,11 +138,17 @@ export const createMessage = async (data: Omit<Message, "id" | "createdAt">) => 
 
 export const getAllTrainings = async () => {
   try {
-    const snap = await getDocs(collection(db, COLLECTIONS.TRAININGS));
-    if (snap.empty || snap.size === 0) return mockTrainings;
+    const colRef = collection(db, COLLECTIONS.TRAININGS);
+    const q = query(colRef, orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+    if (snap.empty || snap.size === 0) {
+      console.log("No trainings found in Firestore");
+      return [];
+    }
     return snap.docs.map(d => ({ id: d.id, ...d.data() } as Training));
-  } catch {
-    return mockTrainings;
+  } catch (e) {
+    console.error("Error loading trainings:", e);
+    return [];
   }
 };
 
