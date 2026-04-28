@@ -184,16 +184,24 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    import("@/lib/firebase/collections").then(mod => {
-      mod.getAllProperties(6).then(data => { if (data.length > 0) setProperties(data); });
-      mod.getAllVehicles().then(data => { if (data.length > 0) setVehicles(data as unknown as Vehicle[]); });
-      mod.getAllTrainings().then(data => { 
-        if (data.length > 0) {
-          setFormations(data.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-        }
-        setLoading(false);
-      });
-    });
+    const fetchData = async () => {
+      try {
+        const { getAllProperties, getAllVehicles, getAllTrainings } = await import("@/lib/firebase/collections");
+        
+        const props = await getAllProperties(6);
+        setProperties(props);
+        
+        const vehs = await getAllVehicles();
+        setVehicles(vehs as unknown as Vehicle[]);
+        
+        const trn = await getAllTrainings();
+        setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+      } catch (err) {
+        console.error("Error:", err);
+      }
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
   return (
