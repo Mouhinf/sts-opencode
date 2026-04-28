@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ParticleField } from "@/components/animations/ParticleField";
 import { FloatingElement } from "@/components/animations/FloatingElement";
+import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
 import type { Property, Vehicle, Training } from "@/types";
 
 const containerVariants = {
@@ -180,22 +181,25 @@ export default function HomePage() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [formations, setFormations] = useState<FallbackFormation[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    import("@/lib/firebase/collections").then(mod => {
-      mod.getAllProperties(6).then(props => {
-        console.log("Properties from homepage:", props);
-        setProperties(props);
-      }).catch(e => console.error("props error:", e));
-      mod.getAllVehicles().then(v => {
-        console.log("Vehicles from homepage:", v);
-        setVehicles(v as unknown as Vehicle[]);
-      }).catch(e => console.error("vehicles error:", e));
-      mod.getAllTrainings().then(t => {
-        console.log("Trainings from homepage:", t);
-        setFormations(t.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
-      }).catch(e => console.error("trainings error:", e));
-    });
+    const timer = setTimeout(async () => {
+      try {
+        const props = await getAllProperties(6);
+        if (props.length > 0) setProperties(props);
+      } catch (e) { console.error(e); }
+      try {
+        const vehs = await getAllVehicles();
+        if (vehs.length > 0) setVehicles(vehs as unknown as Vehicle[]);
+      } catch (e) { console.error(e); }
+      try {
+        const trn = await getAllTrainings();
+        if (trn.length > 0) setFormations(trn.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })));
+      } catch (e) { console.error(e); }
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -279,7 +283,9 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {properties.length === 0 ? (
+              {loading ? (
+                <div className="col-span-3 text-center py-12 text-sts-gray">Chargement...</div>
+              ) : properties.length === 0 ? (
                 <div className="col-span-3 text-center py-12 text-sts-gray">Aucun bien disponible pour le moment</div>
               ) : (
                 properties.slice(0, 6).map((property) => <PropertyCard key={property.id} property={property} />)
@@ -302,7 +308,9 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              {vehicles.length === 0 ? (
+              {loading ? (
+                <div className="col-span-3 text-center py-12 text-gray-400">Chargement...</div>
+              ) : vehicles.length === 0 ? (
                 <div className="col-span-3 text-center py-12 text-gray-400">Aucun véhicule disponible pour le moment</div>
               ) : (
                 vehicles.slice(0, 3).map((vehicle: any) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)
@@ -320,8 +328,10 @@ export default function HomePage() {
               <h3 className="text-4xl md:text-5xl font-bold text-sts-black font-playfair">Nos Formations</h3>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {formations.length === 0 ? (
-                <div className="col-span-4 text-center py-12 text-sts-gray">Aucune formation disponible pour le moment</div>
+              {loading ? (
+                <div className="col-span-4 text-center py-12 text-sts-gray">Chargement...</div>
+              ) : formations.length === 0 ? (
+                fallbackFormations.map((f) => <FormationCard key={f.title} formation={f} />)
               ) : (
                 formations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)
               )}
