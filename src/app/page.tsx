@@ -8,10 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ParticleField } from "@/components/animations/ParticleField";
 import { FloatingElement } from "@/components/animations/FloatingElement";
-import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
 import type { Property, Vehicle, Training } from "@/types";
-
-export const dynamic = 'force-dynamic';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -185,9 +182,11 @@ export default function HomePage() {
   const [formations, setFormations] = useState<FallbackFormation[]>([]);
 
   useEffect(() => {
-    getAllProperties(6).then(setProperties).catch(console.error);
-    getAllVehicles().then(d => setVehicles(d as unknown as Vehicle[])).catch(console.error);
-    getAllTrainings().then(d => setFormations(d.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })))).catch(console.error);
+    import("@/lib/firebase/collections").then(({ getAllProperties, getAllVehicles, getAllTrainings }) => {
+      getAllProperties(6).then(setProperties).catch(console.error);
+      getAllVehicles().then(d => setVehicles(d as unknown as Vehicle[])).catch(console.error);
+      getAllTrainings().then(d => setFormations(d.map((f: Training) => ({ id: f.id, title: f.title || "", description: f.description, duration: f.duration, price: f.price, category: f.category })))).catch(console.error);
+    });
   }, []);
 
   return (
