@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Wrench, Leaf, Truck, Calculator, Bed, Maximize, ExternalLink, Menu, X } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail, Clock, CheckCircle, Star, Send, Loader2, Building2, Car, Sprout, GraduationCap, Briefcase, Globe, Users, Shield, Zap, Calendar, Leaf, Truck, Calculator, Maximize, Bed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ParticleField } from "@/components/animations/ParticleField";
 import { FloatingElement } from "@/components/animations/FloatingElement";
-import { getAllProperties } from "@/lib/firebase/collections";
-import type { Property } from "@/types";
+import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
+import type { Property, Vehicle, Training } from "@/types";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,11 +50,20 @@ const transportVehicles = [
   { id: "3", name: "Toyota Hiace", category: "Minibus", price: 22000000, image: "https://images.unsplash.com/photo-1536402545507-0e91c9df8f83?w=800", status: "available" },
 ];
 
-const formations = [
-  { title: "Gestion Immobilière", desc: "Masterclass en gestion locative et transaction", duration: "2 jours", icon: Building2 },
-  { title: "Transport & Logistique", desc: "Formation chauffeurs professionnels", duration: "1 mois", icon: Truck },
-  { title: "Comptabilité Sage", desc: "Logiciel Sage comptabilité & paie", duration: "2 semaines", icon: Calculator },
-  { title: "Technique d'Élevage", desc: "Élevage moderne de volailles", duration: "1 semaine", icon: Leaf },
+type FallbackFormation = {
+  id?: string;
+  title: string;
+  description?: string;
+  duration?: string;
+  price?: number;
+  category?: string;
+};
+
+const fallbackFormations: FallbackFormation[] = [
+  { title: "Gestion Immobilière", description: "Masterclass en gestion locative et transaction", duration: "2 jours", price: 150000 },
+  { title: "Transport & Logistique", description: "Formation chauffeurs professionnels", duration: "1 mois", price: 250000 },
+  { title: "Comptabilité Sage", description: "Logiciel Sage comptabilité & paie", duration: "2 semaines", price: 100000 },
+  { title: "Technique d'Élevage", description: "Élevage moderne de volailles", duration: "1 semaine", price: 75000 },
 ];
 
 const testimonials = [
@@ -93,7 +102,7 @@ function PropertyCard({ property }: { property: Property }) {
             <h3 className="font-bold text-lg text-sts-black mb-2 group-hover:text-sts-green transition-colors">{property.title}</h3>
             <div className="flex gap-4 text-sm text-sts-gray mb-3">
               <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {property.surface} m²</span>
-              {property.bedrooms > 0 && <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {property.bedrooms} ch.</span>}
+              {property.bedrooms && property.bedrooms > 0 && <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {property.bedrooms} ch.</span>}
             </div>
             <div className="text-xl font-bold text-sts-green">{new Intl.NumberFormat("fr-FR").format(property.price)} XOF</div>
           </div>
@@ -103,19 +112,23 @@ function PropertyCard({ property }: { property: Property }) {
   );
 }
 
-function VehicleCard({ vehicle }: { vehicle: typeof transportVehicles[0] }) {
+function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
+  const image = vehicle.imageUrl || vehicle.images?.[0] || "https://images.unsplash.com/photo-1536402545507-0e91c9df8f83?w=800";
+  const displayPrice = (vehicle as any).price || vehicle.pricePerDay || 0;
+  const displayName = vehicle.name || `${vehicle.brand || ""} ${vehicle.model || ""}`.trim() || "Véhicule";
+  const displayCategory = vehicle.type || (vehicle as any).category || "Véhicule";
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
       <Link href="/services/transport">
         <Card variant="elevated" className="overflow-hidden group h-full">
           <div className="relative h-40 overflow-hidden">
-            <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <img src={image} alt={displayName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-sts-black/60 to-transparent" />
-            <div className="absolute top-4 left-4 bg-sts-blue text-white text-xs font-bold px-3 py-1 rounded-full">{vehicle.category}</div>
+            <div className="absolute top-4 left-4 bg-sts-blue text-white text-xs font-bold px-3 py-1 rounded-full">{displayCategory}</div>
           </div>
           <div className="p-4">
-            <h3 className="font-bold text-sts-black group-hover:text-sts-blue transition-colors">{vehicle.name}</h3>
-            <div className="text-sts-green font-bold mt-2">{new Intl.NumberFormat("fr-FR").format(vehicle.price)} XOF</div>
+            <h3 className="font-bold text-sts-black group-hover:text-sts-blue transition-colors">{displayName}</h3>
+            <div className="text-sts-green font-bold mt-2">{new Intl.NumberFormat("fr-FR").format(displayPrice)} XOF</div>
           </div>
         </Card>
       </Link>
@@ -123,19 +136,21 @@ function VehicleCard({ vehicle }: { vehicle: typeof transportVehicles[0] }) {
   );
 }
 
-function FormationCard({ formation }: { formation: typeof formations[0] }) {
-  const Icon = formation.icon;
+function FormationCard({ formation }: { formation: FallbackFormation }) {
+  const title = formation.title || "Formation";
+  const desc = formation.description || formation.category || "";
+  const duration = formation.duration || "";
   return (
     <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
       <Link href="/services/formation">
         <Card variant="elevated" className="p-6 group h-full">
           <div className="w-14 h-14 bg-sts-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-sts-green group-hover:text-white transition-colors">
-            <Icon className="w-7 h-7" />
+            <GraduationCap className="w-7 h-7" />
           </div>
-          <h3 className="font-bold text-sts-black mb-2">{formation.title}</h3>
-          <p className="text-sts-gray text-sm mb-3">{formation.desc}</p>
+          <h3 className="font-bold text-sts-black mb-2">{title}</h3>
+          <p className="text-sts-gray text-sm mb-3">{desc}</p>
           <div className="flex items-center gap-2 text-xs text-sts-blue font-medium">
-            <Calendar className="w-4 h-4" /> {formation.duration}
+            <Calendar className="w-4 h-4" /> {duration}
           </div>
         </Card>
       </Link>
@@ -179,17 +194,37 @@ function Newsletter() {
 
 export default function HomePage() {
   const [properties, setProperties] = useState<Property[]>(defaultProperties);
+  const [vehicles, setVehicles] = useState<Vehicle[]>(transportVehicles as unknown as Vehicle[]);
+  const [formations, setFormations] = useState<FallbackFormation[]>(fallbackFormations);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const props = await getAllProperties(6);
-        if (props.length > 0) {
-          setProperties(props.filter(p => p.status === "available").slice(0, 6));
+        const [propsData, vehiclesData, formationsData] = await Promise.all([
+          getAllProperties(6),
+          getAllVehicles(),
+          getAllTrainings(),
+        ]);
+        if (propsData.length > 0) {
+          setProperties(propsData.filter(p => p.status === "available").slice(0, 6));
+        }
+        if (vehiclesData.length > 0) {
+          setVehicles((vehiclesData as unknown as Vehicle[]).filter((v: any) => v.status === "available").slice(0, 3));
+        }
+        if (formationsData.length > 0) {
+          const mapped = formationsData.map((f: Training) => ({
+            id: f.id,
+            title: f.title,
+            description: f.description,
+            duration: f.duration,
+            price: f.price,
+            category: f.category,
+          }));
+          setFormations(mapped.slice(0, 4));
         }
       } catch (e) {
-        console.log("Using default properties");
+        console.log("Using default data");
       } finally {
         setLoading(false);
       }
@@ -198,6 +233,8 @@ export default function HomePage() {
   }, []);
 
   const displayProperties = properties.length > 0 ? properties : defaultProperties;
+  const displayVehicles = vehicles.length > 0 ? vehicles : transportVehicles as unknown as Vehicle[];
+  const displayFormations = formations.length > 0 ? formations : fallbackFormations;
 
   return (
     <main className="min-h-screen bg-white">
@@ -281,7 +318,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {transportVehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
+              {displayVehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
             </div>
           </motion.div>
         </div>
@@ -297,7 +334,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {formations.map((formation) => <FormationCard key={formation.title} formation={formation} />)}
+              {displayFormations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)}
             </div>
           </motion.div>
         </div>
