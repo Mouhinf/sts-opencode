@@ -11,6 +11,8 @@ import { FloatingElement } from "@/components/animations/FloatingElement";
 import { getAllProperties, getAllVehicles, getAllTrainings } from "@/lib/firebase/collections";
 import type { Property, Vehicle, Training } from "@/types";
 
+export const dynamic = 'force-dynamic';
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
