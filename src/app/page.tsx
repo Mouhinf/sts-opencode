@@ -186,17 +186,20 @@ export default function HomePage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [propsData, vehiclesData, formationsData] = await Promise.all([
-          getAllProperties(6),
-          getAllVehicles(),
-          getAllTrainings(),
-        ]);
+        const propsData = await getAllProperties(6);
+        console.log("Properties loaded:", propsData);
         if (propsData.length > 0) {
-          setProperties(propsData.filter(p => p.status === "available").slice(0, 6));
+          setProperties(propsData);
         }
+        
+        const vehiclesData = await getAllVehicles();
+        console.log("Vehicles loaded:", vehiclesData);
         if (vehiclesData.length > 0) {
-          setVehicles((vehiclesData as unknown as Vehicle[]).filter((v: any) => v.status === "available").slice(0, 3));
+          setVehicles(vehiclesData as unknown as Vehicle[]);
         }
+        
+        const formationsData = await getAllTrainings();
+        console.log("Trainings loaded:", formationsData);
         if (formationsData.length > 0) {
           const mapped = formationsData.map((f: Training) => ({
             id: f.id,
@@ -206,17 +209,16 @@ export default function HomePage() {
             price: f.price,
             category: f.category,
           }));
-          setFormations(mapped.slice(0, 4));
+          setFormations(mapped);
         }
       } catch (e) {
-        console.log("Using default data");
+        console.error("Error loading data:", e);
       } finally {
         setLoading(false);
       }
     }
     loadData();
   }, []);
-  const displayFormations = formations;
 
   return (
     <main className="min-h-screen bg-white">
@@ -363,7 +365,7 @@ export default function HomePage() {
               ) : formations.length === 0 ? (
                 <div className="col-span-4 text-center py-12 text-sts-gray">Aucune formation disponible pour le moment</div>
               ) : (
-                displayFormations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)
+                formations.map((formation) => <FormationCard key={formation.id || formation.title} formation={formation} />)
               )}
             </div>
           </motion.div>
